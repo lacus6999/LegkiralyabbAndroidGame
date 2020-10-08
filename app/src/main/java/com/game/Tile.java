@@ -1,10 +1,6 @@
 package com.game;
 
-import android.content.res.Resources;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-
-import com.example.game.R;
 
 
 public class Tile {
@@ -12,14 +8,29 @@ public class Tile {
     private int id;
     private int x;
     private int y;
+    private final int tileSize;
+    private Bitmap shownImage;
+    private Bitmap backSideImage;
     private Bitmap image;
+    public boolean isFlipped = false;
 
-    Tile(int id, int x, int y, Resources res) {
+    Tile(int id, int tileSize) {
         this.id = id;
-        this.x = x;
-        this.y = y;
-        image = BitmapFactory.decodeResource(res, R.drawable.tile);
-        image = Bitmap.createScaledBitmap(image, 30, 30, false);
+        this.tileSize = tileSize;
+        image = Bitmap.createBitmap(tileSize, tileSize, Bitmap.Config.ARGB_8888);
+        image.eraseColor(android.graphics.Color.GREEN);
+    }
+
+    public void flip() {
+        if (shownImage.equals(image)) {
+            isFlipped = false;
+            shownImage = backSideImage;
+        }
+        else {
+            isFlipped = true;
+            shownImage = image;
+        }
+
     }
 
     public int getId() {
@@ -46,7 +57,20 @@ public class Tile {
         this.y = y;
     }
 
-    public Bitmap getImage() {
-        return image;
+    public void setBackSideImage(Bitmap backSideImage) {
+        this.backSideImage = backSideImage;
     }
+
+    public void setImage(Bitmap image) {
+        this.image = image;
+    }
+
+    public Bitmap getShownImage() {
+        return shownImage;
+    }
+
+    public void setShownImage(Bitmap backSideImage) {
+        this.shownImage = backSideImage;
+    }
+
 }

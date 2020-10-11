@@ -24,18 +24,26 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/bluetoothMessage"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Available devices:"
+                android:text="Paired device:"
                 android:textAlignment="center"
                 android:textColor="#227B4A"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="40sp"
+                android:paddingTop="10sp"
+                android:background="@android:color/holo_green_dark"
+                android:id="@+id/paired_device"
+                />
+
             <ScrollView
-                android:layout_width="349dp"
-                android:layout_height="616dp"
+                android:layout_width="match_parent"
+                android:layout_height="86dp"
                 android:layout_marginTop="40sp"
                 android:background="@drawable/simple_green_background">
 
@@ -45,6 +53,14 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical" />
             </ScrollView>
+
+            <Button
+                android:id="@+id/bluetooth_continue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10sp"
+                android:background="@android:color/holo_green_dark"
+                android:text="Continue" />
 
         </LinearLayout>
 

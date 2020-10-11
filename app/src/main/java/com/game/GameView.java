@@ -18,7 +18,7 @@ import java.util.List;
 public class GameView extends SurfaceView implements Runnable {
 
     private Thread thread;
-    
+
     private boolean isPlaying;
     private List<Tile> tiles;
     private Paint paint;

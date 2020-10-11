@@ -11,7 +11,6 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.MainActivity;
 import com.example.game.R;
 import com.game.GameActivity;
 
@@ -32,13 +31,15 @@ public class BluetoothActivity extends AppCompatActivity {
 
     private void init() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if(bluetoothAdapter != null){
-            if(bluetoothAdapter.isEnabled()){
+        if (bluetoothAdapter != null) {
+            if (bluetoothAdapter.isEnabled()) {
                 Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
-                if(!pairedDevices.isEmpty()){
-                    TextView textView = findViewById(R.id.paired_device);
-                    BluetoothDevice bluetoothDevice = pairedDevices.iterator().next();
-                    textView.setText(bluetoothDevice.getName());
+                if (!pairedDevices.isEmpty()) {
+                    LinearLayout bluetooth_available_devices = findViewById(R.id.bluetooth_available_devices);
+
+                    for(BluetoothDevice bluetoothDevice : pairedDevices) {
+                            bluetooth_available_devices.addView(getTextView(bluetoothDevice.getName(), bluetoothDevice.getAddress()));
+                    }
 
                     final Button button = findViewById(R.id.bluetooth_continue);
                     button.setOnClickListener(new View.OnClickListener() {
@@ -46,8 +47,7 @@ public class BluetoothActivity extends AppCompatActivity {
                             startActivity(new Intent(BluetoothActivity.this, GameActivity.class));
                         }
                     });
-                }
-                else {
+                } else {
                     TextView textView = findViewById(R.id.paired_device);
                     textView.setText("No paired device.");
                 }
@@ -57,4 +57,17 @@ public class BluetoothActivity extends AppCompatActivity {
             //setTextView("Bluetooth is not accessible on your device.");
         }
     }
+
+    private TextView getTextView(final String name, String address) {
+        final BluetoothTextView textView = new BluetoothTextView(this, name, address);
+        textView.setText(name);
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                System.out.println(textView.getName());
+            }
+        });
+        return textView;
+    }
+
 }

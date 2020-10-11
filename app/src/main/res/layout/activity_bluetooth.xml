@@ -23,28 +23,23 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+
             <TextView
-                android:id="@+id/bluetoothMessage"
+                android:id="@+id/paired_device"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Paired device:"
-                android:textAlignment="center"
-                android:textColor="#227B4A"
+                android:background="@android:color/holo_green_dark"
+                android:gravity="center_horizontal"
+                android:padding="5sp"
+                android:text="Paired devices:"
+                android:textColor="@android:color/white"
                 android:textSize="30sp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="40sp"
-                android:paddingTop="10sp"
-                android:background="@android:color/holo_green_dark"
-                android:id="@+id/paired_device"
-                />
-
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="86dp"
-                android:layout_marginTop="40sp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5sp"
                 android:background="@drawable/simple_green_background">
 
                 <LinearLayout

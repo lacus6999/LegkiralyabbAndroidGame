@@ -31,6 +31,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d9b500dd-58cf-43f6-9b0f-2e3f0affa0f2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/src/main/java/com/bluetooth/BluetoothTextView.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.bin" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/executionHistory/executionHistory.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" beforeDir="false" afterPath="$PROJECT_DIR$/.gradle/6.1.1/fileHashes/fileHashes.bin" afterDir="false" />
@@ -64,13 +65,16 @@
       </state>
     </system>
   </component>
+  <component name="FavoritesManager">
+    <favorites_list name="Game" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="FxmlFile" />
-        <option value="Class" />
         <option value="resourceFile" />
         <option value="Kotlin File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -332,10 +336,10 @@
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
     <state x="454" y="211" key="#com.intellij.execution.impl.EditConfigurationsDialog/72.27.1848.1053@72.27.1848.1053" timestamp="1601991830827" />
-    <state x="761" y="245" width="374" height="582" key="#com.intellij.ide.util.MemberChooser" timestamp="1602427385067">
+    <state x="761" y="245" width="374" height="569" key="#com.intellij.ide.util.MemberChooser" timestamp="1602445849317">
       <screen x="0" y="0" width="1920" height="1080" />
     </state>
-    <state x="761" y="245" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1602427385067" />
+    <state x="761" y="245" width="374" height="569" key="#com.intellij.ide.util.MemberChooser/0.0.1920.1080@0.0.1920.1080" timestamp="1602445849317" />
     <state x="804" y="266" width="374" height="582" key="#com.intellij.ide.util.MemberChooser/72.27.1848.1053@72.27.1848.1053" timestamp="1602165235715" />
     <state x="728" y="339" width="525" height="435" key="#com.intellij.ide.util.TreeClassChooserDialog" timestamp="1601991829519">
       <screen x="72" y="27" width="1848" height="1053" />

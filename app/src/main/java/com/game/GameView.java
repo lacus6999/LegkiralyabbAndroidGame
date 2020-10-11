@@ -44,6 +44,7 @@ public class GameView extends SurfaceView implements Runnable {
     private void setupBackground() {
         background = BitmapFactory.decodeResource(getResources(), R.drawable.background, getBitmapOptions(3264, 1280));//Bitmap.createBitmap(1280, 1920, Bitmap.Config.ARGB_8888);
     }
+
     private void setupTiles() {
         for (int i = 0; i < tileAmount; i++) {
             tiles.add(new Tile(i, tileSize));
@@ -56,7 +57,7 @@ public class GameView extends SurfaceView implements Runnable {
             tile.setShownImage(backSideImage);
         }
 
-        //Collections.shuffle(tiles);
+        Collections.shuffle(tiles);
 
         int rowCount = 1;
         int iterator = 1;
@@ -95,9 +96,9 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private void update() {
-        if(tilePair.size() == 2){
-            if(tilePair.get(0).getId() == tilePair.get(1).getId()){
-
+        if (tilePair.size() == 2) {
+            if (tilePair.get(0).getId() == tilePair.get(1).getId()) {
+//TODO score implementation
             } else {
                 sleep(500);
                 tilePair.get(0).flip();
@@ -134,18 +135,16 @@ public class GameView extends SurfaceView implements Runnable {
         int x = (int) event.getX();
         int y = (int) event.getY();
 
-        switch (action) {
-            case MotionEvent.ACTION_DOWN:
-                for (Tile tile : tiles) {
-                    if (x >= tile.getX() && x < (tile.getX() + tile.getShownImage().getWidth())
-                            && y >= tile.getY() && y < (tile.getY() + tile.getShownImage().getHeight())) {
-                        if(!tile.isFlipped) {
-                            tile.flip();
-                            tilePair.add(tile);
-                        }
+        if (action == MotionEvent.ACTION_DOWN) {
+            for (Tile tile : tiles) {
+                if (x >= tile.getX() && x < (tile.getX() + tile.getShownImage().getWidth())
+                        && y >= tile.getY() && y < (tile.getY() + tile.getShownImage().getHeight())) {
+                    if (!tile.isFlipped) {
+                        tile.flip();
+                        tilePair.add(tile);
                     }
                 }
-                break;
+            }
         }
         return true;
     }

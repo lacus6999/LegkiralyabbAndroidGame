@@ -2,15 +2,12 @@ package com.game;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
-
-import com.example.game.R;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -24,16 +21,19 @@ public class GameView extends SurfaceView implements Runnable {
     private List<Tile> tiles;
     private Paint paint;
 
-    private int tileAmount = 15;
+    private int tileAmount = 10;
     private Bitmap background;
-    private Bitmap backSideImage;
-    private int tileSize = 150;
+    private int tileSize;
+
+    private Images images;
 
     private List<Tile> tilePair = new ArrayList<>();
 
     public GameView(Context context) {
         super(context);
 
+        images = new Images(getResources());
+        tileSize = images.getTileSize();
         tiles = new ArrayList<>();
         paint = new Paint();
         paint.setTextSize(128);
@@ -44,19 +44,17 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private void setupBackground() {
-        background = BitmapFactory.decodeResource(getResources(), R.drawable.background, getBitmapOptions(3264, 1280));//Bitmap.createBitmap(1280, 1920, Bitmap.Config.ARGB_8888);
+        background = images.getBackgroundImage();
     }
 
     private void setupTiles() {
         for (int i = 0; i < tileAmount; i++) {
-            tiles.add(new Tile(i, tileSize));
-            tiles.add(new Tile(i, tileSize));
+            tiles.add(new Tile(i, tileSize, images.getCardImages().get(i)));
+            tiles.add(new Tile(i, tileSize, images.getCardImages().get(i)));
         }
-        backSideImage = BitmapFactory.decodeResource(getResources(), R.drawable.tile, getBitmapOptions(512, tileSize));
-
         for (Tile tile : tiles) {
-            tile.setBackSideImage(backSideImage);
-            tile.setShownImage(backSideImage);
+            tile.setBackSideImage(images.getBackSideImage());
+            tile.setShownImage(images.getBackSideImage());
         }
 
         Collections.shuffle(tiles);
@@ -76,15 +74,6 @@ public class GameView extends SurfaceView implements Runnable {
             tiles.get(i).setY(rowCount * distance);
             iterator++;
         }
-    }
-
-    private BitmapFactory.Options getBitmapOptions(int srcWidth, int targetWidth) {
-        BitmapFactory.Options mBitmapOptions = new BitmapFactory.Options();
-        mBitmapOptions.inScaled = true;
-        mBitmapOptions.inSampleSize = 4;
-        mBitmapOptions.inDensity = srcWidth;
-        mBitmapOptions.inTargetDensity = targetWidth * mBitmapOptions.inSampleSize;
-        return mBitmapOptions;
     }
 
 

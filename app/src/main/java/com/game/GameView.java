@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 
@@ -97,16 +98,7 @@ public class GameView extends SurfaceView implements Runnable {
     }
 
     private void update() {
-        if (tilePair.size() == 2) {
-            if (tilePair.get(0).getId() == tilePair.get(1).getId()) {
-//TODO score implementation
-            } else {
-                sleep(500);
-                tilePair.get(0).flip();
-                tilePair.get(1).flip();
-            }
-            tilePair.clear();
-        }
+
     }
 
     private void draw() {
@@ -144,10 +136,29 @@ public class GameView extends SurfaceView implements Runnable {
                         tile.flip();
                         tilePair.add(tile);
                     }
+                    if (tilePair.size() == 2) {
+                        handleCards();
+                    }
                 }
             }
         }
         return true;
+    }
+
+    private void handleCards() {
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                if (tilePair.get(0).getId() == tilePair.get(1).getId()) {
+                    //TODO SCORE
+                } else {
+                    tilePair.get(0).flip();
+                    tilePair.get(1).flip();
+                }
+                tilePair.clear();
+            }
+        }, 1000);
     }
 
 

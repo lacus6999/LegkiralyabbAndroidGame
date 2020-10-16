@@ -1,17 +1,16 @@
-package com.game;
+package com.example.legkiralyabbandroidappv2.game;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.example.game.R;
+
+import com.example.legkiralyabbandroidappv2.R;
 
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 @Getter

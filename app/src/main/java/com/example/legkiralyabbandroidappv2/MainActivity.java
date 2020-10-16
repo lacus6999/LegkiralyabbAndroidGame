@@ -1,4 +1,4 @@
-package com;
+package com.example.legkiralyabbandroidappv2;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -7,8 +7,8 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.bluetooth.BluetoothActivity;
-import com.example.game.R;
+import com.example.legkiralyabbandroidappv2.bluetooth.BluetoothActivity;
+
 
 public class MainActivity extends AppCompatActivity {
 

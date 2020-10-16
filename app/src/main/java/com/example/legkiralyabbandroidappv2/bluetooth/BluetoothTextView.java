@@ -1,4 +1,4 @@
-package com.bluetooth;
+package com.example.legkiralyabbandroidappv2.bluetooth;
 
 import android.content.Context;
 

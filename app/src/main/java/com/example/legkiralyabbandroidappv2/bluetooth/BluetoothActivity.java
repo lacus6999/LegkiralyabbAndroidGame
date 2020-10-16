@@ -1,4 +1,4 @@
-package com.bluetooth;
+package com.example.legkiralyabbandroidappv2.bluetooth;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -11,8 +11,9 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.game.R;
-import com.game.GameActivity;
+
+import com.example.legkiralyabbandroidappv2.R;
+import com.example.legkiralyabbandroidappv2.game.GameActivity;
 
 import java.util.Set;
 

@@ -5,8 +5,8 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "com.example.game"
-        minSdkVersion 24
+        applicationId "com.example.legkiralyabbandroidappv2"
+        minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -30,7 +30,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
 
     dependencies {
-        compileOnly 'org.projectlombok:lombok:1.18.14'
-        annotationProcessor 'org.projectlombok:lombok:1.18.14'
+        compileOnly 'org.projectlombok:lombok:1.18.16'
+        annotationProcessor 'org.projectlombok:lombok:1.18.16'
     }
+
 }

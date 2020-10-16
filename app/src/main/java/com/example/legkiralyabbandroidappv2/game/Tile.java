@@ -1,4 +1,4 @@
-package com.game;
+package com.example.legkiralyabbandroidappv2.game;
 
 import android.graphics.Bitmap;
 

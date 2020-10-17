@@ -49,8 +49,26 @@ public class GameView extends SurfaceView implements Runnable {
 
     private void setupTiles() {
         for (int i = 0; i < tileAmount; i++) {
-            tiles.add(new Tile(i, tileSize, images.getCardImages().get(i)));
-            tiles.add(new Tile(i, tileSize, images.getCardImages().get(i)));
+
+            tiles.add(new Tile(i, tileSize, images.getCardImagesEveryday().get(i)));
+            tiles.add(new Tile(i, tileSize, images.getCardImagesEveryday().get(i)));
+
+            //TODO : ami itt van kell majd
+
+//            if(){
+//                tiles.add(new Tile(i, tileSize, images.getCardImagesPeople().get(i)));
+//                tiles.add(new Tile(i, tileSize, images.getCardImagesPeople().get(i)));
+//            }else if (){
+//                tiles.add(new Tile(i, tileSize, images.getCardImagesAnimal().get(i)));
+//                tiles.add(new Tile(i, tileSize, images.getCardImagesAnimal().get(i)));
+//            }else if(){
+//                tiles.add(new Tile(i, tileSize, images.getCardImagesEveryday().get(i)));
+//                tiles.add(new Tile(i, tileSize, images.getCardImagesEveryday().get(i)));
+//            }else if(){
+//                tiles.add(new Tile(i, tileSize, images.getCardImagesScience().get(i)));
+//                tiles.add(new Tile(i, tileSize, images.getCardImagesScience().get(i)));
+//            }
+
         }
         for (Tile tile : tiles) {
             tile.setBackSideImage(images.getBackSideImage());

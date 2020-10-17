@@ -17,7 +17,11 @@ import java.util.List;
 @Setter
 public class Images {
 
-    private List<Bitmap> cardImages;
+    private List<Bitmap> cardImagesPeople;
+    private List<Bitmap> cardImagesScience;
+    private List<Bitmap> cardImagesEveryday;
+    private List<Bitmap> cardImagesAnimal;
+
     private Bitmap backgroundImage;
     private Bitmap backSideImage;
     private int tileSize = 150;
@@ -25,7 +29,7 @@ public class Images {
     public Images(Resources res) {
         backgroundImage = getDecodedResource(res, R.drawable.background1, 831, 1280);
         backSideImage = getDecodedResource(res, R.drawable.card_background, 800, tileSize);
-        cardImages = Arrays.asList(
+        cardImagesEveryday = Arrays.asList(
                 getDecodedResource(res, R.drawable.img_01, 800, tileSize),
                 getDecodedResource(res, R.drawable.img_02, 800, tileSize),
                 getDecodedResource(res, R.drawable.img_03, 800, tileSize),
@@ -35,8 +39,89 @@ public class Images {
                 getDecodedResource(res, R.drawable.img_07, 800, tileSize),
                 getDecodedResource(res, R.drawable.img_08, 800, tileSize),
                 getDecodedResource(res, R.drawable.img_09, 800, tileSize),
-                getDecodedResource(res, R.drawable.img_10, 800, tileSize)
+                getDecodedResource(res, R.drawable.img_10, 800, tileSize),
+                getDecodedResource(res, R.drawable.img_11, 800, tileSize),
+                getDecodedResource(res, R.drawable.img_12, 800, tileSize),
+                getDecodedResource(res, R.drawable.img_13, 800, tileSize),
+                getDecodedResource(res, R.drawable.img_14, 800, tileSize),
+                getDecodedResource(res, R.drawable.img_15, 800, tileSize),
+                getDecodedResource(res, R.drawable.img_16, 800, tileSize),
+                getDecodedResource(res, R.drawable.img_17, 800, tileSize),
+                getDecodedResource(res, R.drawable.img_18, 800, tileSize),
+                getDecodedResource(res, R.drawable.img_19, 800, tileSize),
+                getDecodedResource(res, R.drawable.img_20, 800, tileSize)
+
         );
+
+        cardImagesPeople = Arrays.asList(
+                getDecodedResource(res, R.drawable.people_01, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_02, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_03, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_04, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_05, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_06, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_07, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_08, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_09, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_10, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_12, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_13, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_14, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_15, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_16, 800, tileSize),
+                getDecodedResource(res, R.drawable.people_17, 800, tileSize)
+
+        );
+
+        cardImagesAnimal = Arrays.asList(
+                getDecodedResource(res, R.drawable.ani_01, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_02, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_03, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_04, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_05, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_06, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_07, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_08, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_09, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_10, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_11, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_12, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_13, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_14, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_15, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_16, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_17, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_18, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_19, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_20, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_21, 800, tileSize),
+                getDecodedResource(res, R.drawable.ani_22, 800, tileSize)
+
+
+        );
+
+        cardImagesScience = Arrays.asList(
+                getDecodedResource(res, R.drawable.sci_01, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_02, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_03, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_04, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_05, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_06, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_07, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_08, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_09, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_10, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_11, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_12, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_13, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_14, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_15, 800, tileSize),
+                getDecodedResource(res, R.drawable.sci_16, 800, tileSize)
+
+        );
+
+
+
 
     }
 

@@ -7,7 +7,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.legkiralyabbandroidgamev3.bluetooth.BluetoothActivity;
+import com.example.legkiralyabbandroidgamev3.multiplayer.MultiPlayerActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, BluetoothActivity.class));
+                startActivity(new Intent(MainActivity.this, MultiPlayerActivity.class));
             }
         });
     }

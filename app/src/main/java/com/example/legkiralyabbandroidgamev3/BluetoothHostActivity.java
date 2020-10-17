@@ -19,7 +19,6 @@ public class BluetoothHostActivity extends AppCompatActivity {
 
     private BluetoothAdapter bluetoothAdapter;
     private AcceptThread acceptThread;
-    private UUID uuid = UUID.randomUUID();
 
 
     @Override

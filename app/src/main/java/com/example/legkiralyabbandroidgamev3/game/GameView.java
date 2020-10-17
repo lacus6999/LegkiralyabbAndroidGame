@@ -139,12 +139,13 @@ public class GameView extends SurfaceView implements Runnable {
             for (Tile tile : tiles) {
                 if (x >= tile.getX() && x < (tile.getX() + tile.getShownImage().getWidth())
                         && y >= tile.getY() && y < (tile.getY() + tile.getShownImage().getHeight())) {
-                    if (!tile.isFlipped) {
+                    if (!tile.isFlipped && tilePair.size() < 2) {
                         tile.flip();
                         tilePair.add(tile);
-                    }
-                    if (tilePair.size() == 2) {
-                        handleCards();
+
+                        if (tilePair.size() == 2) {
+                            handleCards();
+                        }
                     }
                 }
             }

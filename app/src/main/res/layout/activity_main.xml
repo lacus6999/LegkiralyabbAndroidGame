@@ -7,28 +7,48 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/ic_launcher_background"
-        android:contentDescription="Background"
         android:scaleType="centerCrop" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Legkiralyabb Memoia Jatek"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="50sp"
-        android:gravity="center_horizontal"
-        android:padding="20sp"
-        android:textStyle="bold"/>
 
-    <TextView
-        android:id="@+id/play"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Play"
-        android:textColor="@android:color/holo_green_dark"
-        android:textSize="60sp"
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:gravity="center"
-        android:textStyle="bold"/>
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:padding="20sp"
+            android:text="@string/legkiralyabb_memoia_jatek"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="50sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/play_singleplayer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/play"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="50sp"
+            android:padding="10sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/play_multiplayer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/play_multiplayer"
+            android:textColor="@android:color/holo_green_dark"
+            android:textSize="50sp"
+            android:padding="10sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
 
 
 </RelativeLayout>

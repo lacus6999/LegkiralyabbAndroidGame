@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.legkiralyabbandroidgamev3.game.GameActivity;
 import com.example.legkiralyabbandroidgamev3.multiplayer.MultiPlayerActivity;
 
 
@@ -17,10 +18,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        findViewById(R.id.play).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.play_multiplayer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, MultiPlayerActivity.class));
+            }
+        });
+
+        findViewById(R.id.play_singleplayer).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(MainActivity.this, GameActivity.class));
             }
         });
     }

@@ -7,4 +7,7 @@
     -->
     <string name="hello_world">Hello Square World!</string>
     <string name="title_activity_bluetooth_host">BluetoothHostActivity</string>
+    <string name="play_multiplayer">Play Multiplayer</string>
+    <string name="play">Play</string>
+    <string name="legkiralyabb_memoia_jatek">Legkiralyabb Memoia Jatek</string>
 </resources>

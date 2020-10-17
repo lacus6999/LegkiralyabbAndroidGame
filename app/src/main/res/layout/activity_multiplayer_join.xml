@@ -49,14 +49,6 @@
                     android:orientation="vertical" />
             </ScrollView>
 
-            <Button
-                android:id="@+id/bluetooth_continue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="10sp"
-                android:background="@android:color/holo_green_dark"
-                android:text="Continue" />
-
         </LinearLayout>
 
     </FrameLayout>

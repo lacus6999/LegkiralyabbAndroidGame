@@ -47,13 +47,6 @@ public class BluetoothJoinActivity extends AppCompatActivity {
                     for(BluetoothDevice bluetoothDevice : pairedDevices) {
                             bluetooth_available_devices.addView(getTextView(bluetoothDevice.getName(), bluetoothDevice.getAddress()));
                     }
-
-                    final Button button = findViewById(R.id.bluetooth_continue);
-                    button.setOnClickListener(new View.OnClickListener() {
-                        public void onClick(View v) {
-                            startActivity(new Intent(BluetoothJoinActivity.this, GameActivity.class));
-                        }
-                    });
                 } else {
                     TextView textView = findViewById(R.id.paired_device);
                     textView.setText("No paired device.");

@@ -7,8 +7,8 @@ import android.view.View;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.legkiralyabbandroidgamev3.game.GameActivity;
-import com.example.legkiralyabbandroidgamev3.multiplayer.MultiPlayerActivity;
+import com.example.legkiralyabbandroidgamev3.multiplayer.MultiplayerGameActivity;
+import com.example.legkiralyabbandroidgamev3.singleplayer.GameActivity;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.play_multiplayer).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MainActivity.this, MultiPlayerActivity.class));
+                startActivity(new Intent(MainActivity.this, MultiplayerGameActivity.class));
             }
         });
 

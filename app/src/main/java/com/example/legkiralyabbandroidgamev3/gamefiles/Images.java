@@ -1,4 +1,4 @@
-package com.example.legkiralyabbandroidgamev3.game;
+package com.example.legkiralyabbandroidgamev3.gamefiles;
 
 import android.content.res.Resources;
 import android.graphics.Bitmap;

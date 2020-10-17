@@ -1,4 +1,4 @@
-package com.example.legkiralyabbandroidgamev3.game;
+package com.example.legkiralyabbandroidgamev3.gamefiles;
 
 import android.graphics.Bitmap;
 
@@ -18,12 +18,10 @@ public class Tile {
     private Bitmap image;
     public boolean isFlipped = false;
 
-    Tile(int id, int tileSize, Bitmap frontSideImage) {
+    public Tile(int id, int tileSize, Bitmap frontSideImage) {
         this.id = id;
         this.tileSize = tileSize;
         this.image = frontSideImage;
-//        image = Bitmap.createBitmap(tileSize, tileSize, Bitmap.Config.ARGB_8888);
-//        image.eraseColor(android.graphics.Color.GREEN);
     }
 
     public void flip() {

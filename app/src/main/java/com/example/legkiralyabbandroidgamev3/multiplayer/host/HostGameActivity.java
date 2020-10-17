@@ -1,13 +1,15 @@
-package com.example.legkiralyabbandroidgamev3.game;
+package com.example.legkiralyabbandroidgamev3.multiplayer.host;
 
 import android.os.Bundle;
 import android.view.WindowManager;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class GameActivity extends AppCompatActivity {
+import com.example.legkiralyabbandroidgamev3.multiplayer.client.ClientGameView;
 
-    private GameView gameView;
+public class HostGameActivity extends AppCompatActivity {
+
+    private HostGameView gameView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -15,7 +17,7 @@ public class GameActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        gameView = new GameView(this);
+        gameView = new HostGameView(this);
         setContentView(gameView);
     }
 

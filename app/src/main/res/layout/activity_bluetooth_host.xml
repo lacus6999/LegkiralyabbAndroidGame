@@ -5,8 +5,30 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/holo_purple"
+    android:gravity="center"
     android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".BluetoothHostActivity"
+    tools:context=".multiplayer.host.BluetoothHostActivity"
     tools:deviceIds="wear">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30sp"
+            android:text="Bluetooth paired devices can connect"
+            android:textSize="40sp"
+            android:gravity="center"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="30sp"
+            android:text="Waiting for a device to connect..."
+            android:textSize="40sp"
+            android:gravity="center"/>
+    </LinearLayout>
 </RelativeLayout>

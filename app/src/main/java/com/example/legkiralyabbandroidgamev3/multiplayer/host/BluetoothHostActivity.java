@@ -1,4 +1,4 @@
-package com.example.legkiralyabbandroidgamev3;
+package com.example.legkiralyabbandroidgamev3.multiplayer.host;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -6,11 +6,10 @@ import android.bluetooth.BluetoothServerSocket;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.legkiralyabbandroidgamev3.game.GameActivity;
+import com.example.legkiralyabbandroidgamev3.R;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -19,6 +18,9 @@ public class BluetoothHostActivity extends AppCompatActivity {
 
     private BluetoothAdapter bluetoothAdapter;
     private AcceptThread acceptThread;
+
+    public static BluetoothHostActivity instanceOfActivity;
+    public BluetoothSocket socket;
 
 
     @Override
@@ -35,7 +37,6 @@ public class BluetoothHostActivity extends AppCompatActivity {
             if (bluetoothAdapter.isEnabled()) {
                 BluetoothDevice bluetoothDevice = bluetoothAdapter.getRemoteDevice(bluetoothAdapter.getAddress());
                 acceptThread = new AcceptThread(bluetoothDevice.getName());
-                Toast.makeText(this, "accept thread started", Toast.LENGTH_SHORT).show();
                 acceptThread.start();
             }
         }
@@ -86,8 +87,11 @@ public class BluetoothHostActivity extends AppCompatActivity {
     }
 
     private void manageMyConnectedSocket(BluetoothSocket socket) {
-        acceptThread.cancel();
-        startActivity(new Intent(BluetoothHostActivity.this, GameActivity.class));
+
+        this.socket = socket;
+        instanceOfActivity = this;
+
+        startActivity(new Intent(BluetoothHostActivity.this, HostGameActivity.class));
     }
 
 }

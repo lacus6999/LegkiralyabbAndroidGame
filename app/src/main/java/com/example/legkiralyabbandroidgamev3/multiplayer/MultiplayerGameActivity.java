@@ -6,10 +6,11 @@ import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.legkiralyabbandroidgamev3.BluetoothHostActivity;
 import com.example.legkiralyabbandroidgamev3.R;
+import com.example.legkiralyabbandroidgamev3.multiplayer.client.BluetoothClientActivity;
+import com.example.legkiralyabbandroidgamev3.multiplayer.host.BluetoothHostActivity;
 
-public class MultiPlayerActivity extends AppCompatActivity {
+public class MultiplayerGameActivity extends AppCompatActivity {
 
 
     @Override
@@ -20,13 +21,13 @@ public class MultiPlayerActivity extends AppCompatActivity {
         findViewById(R.id.multiplayer_textview_host).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MultiPlayerActivity.this, BluetoothHostActivity.class));
+                startActivity(new Intent(MultiplayerGameActivity.this, BluetoothHostActivity.class));
             }
         });
         findViewById(R.id.multiplayer_textview_join).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(MultiPlayerActivity.this, BluetoothJoinActivity.class));
+                startActivity(new Intent(MultiplayerGameActivity.this, BluetoothClientActivity.class));
             }
         });
 

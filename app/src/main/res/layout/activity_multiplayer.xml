@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@android:color/holo_purple"
     android:padding="@dimen/box_inset_layout_padding"
-    tools:context=".multiplayer.MultiPlayerActivity"
+    tools:context=".multiplayer.MultiplayerGameActivity"
     tools:deviceIds="wear">
 
     <LinearLayout

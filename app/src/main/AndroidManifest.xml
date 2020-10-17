@@ -14,19 +14,28 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <!--MULTIPLAYER-->
         <activity
-            android:name=".BluetoothHostActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:name=".multiplayer.host.BluetoothHostActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar"/>
         <activity
-            android:name=".multiplayer.BluetoothJoinActivity"
-            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:name=".multiplayer.client.BluetoothClientActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+        <activity
+            android:name=".multiplayer.host.HostGameActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
-            android:name=".multiplayer.MultiPlayerActivity"
-            android:label="@string/title_activity_multiplayer" />
+            android:name=".multiplayer.client.ClientGameActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+
         <activity
-            android:name=".game.GameActivity"
+            android:name=".multiplayer.MultiplayerGameActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
+
+        <!--SINGLEPLAYER-->
+        <activity
+            android:name=".singleplayer.GameActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MainActivity"

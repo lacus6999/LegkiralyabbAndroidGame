@@ -1,4 +1,4 @@
-package com.example.legkiralyabbandroidgamev3.multiplayer;
+package com.example.legkiralyabbandroidgamev3.multiplayer.client;
 
 import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
@@ -12,16 +12,19 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.legkiralyabbandroidgamev3.R;
-import com.example.legkiralyabbandroidgamev3.game.GameActivity;
+import com.example.legkiralyabbandroidgamev3.multiplayer.BluetoothTextView;
 
 import java.io.IOException;
 import java.util.Set;
 import java.util.UUID;
 
-public class BluetoothJoinActivity extends AppCompatActivity {
+public class BluetoothClientActivity extends AppCompatActivity {
 
-    BluetoothAdapter bluetoothAdapter;
+    private BluetoothAdapter bluetoothAdapter;
     private ConnectThread connectThread;
+
+    public static BluetoothClientActivity instanceOfActivity;
+    public BluetoothSocket socket;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -113,8 +116,10 @@ public class BluetoothJoinActivity extends AppCompatActivity {
 
 
     private void manageMyConnectedSocket(BluetoothSocket socket) {
-        connectThread.cancel();
-        startActivity(new Intent(BluetoothJoinActivity.this, GameActivity.class));
+        this.socket = socket;
+        instanceOfActivity = this;
+
+        startActivity(new Intent(BluetoothClientActivity.this, ClientGameActivity.class));
     }
 
 

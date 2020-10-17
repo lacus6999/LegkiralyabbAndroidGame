@@ -11,7 +11,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.legkiralyabbandroidgamev3.game.GameActivity;
-import com.example.legkiralyabbandroidgamev3.multiplayer.BluetoothJoinActivity;
 
 import java.io.IOException;
 import java.util.UUID;
@@ -47,11 +46,8 @@ public class BluetoothHostActivity extends AppCompatActivity {
         private final BluetoothServerSocket mmServerSocket;
 
         public AcceptThread(String name) {
-            // Use a temporary object that is later assigned to mmServerSocket
-            // because mmServerSocket is final.
             BluetoothServerSocket tmp = null;
             try {
-                // MY_UUID is the app's UUID string, also used by the client code.
                 tmp = bluetoothAdapter.listenUsingRfcommWithServiceRecord(name, UUID.fromString("23b94798-106e-11eb-adc1-0242ac120002"));
             } catch (IOException e) {
                 e.printStackTrace();
@@ -61,7 +57,6 @@ public class BluetoothHostActivity extends AppCompatActivity {
 
         public void run() {
             BluetoothSocket socket = null;
-            // Keep listening until exception occurs or a socket is returned.
             while (true) {
                 try {
                     socket = mmServerSocket.accept();
@@ -71,8 +66,6 @@ public class BluetoothHostActivity extends AppCompatActivity {
                 }
 
                 if (socket != null) {
-                    // A connection was accepted. Perform work associated with
-                    // the connection in a separate thread.
                     manageMyConnectedSocket(socket);
                     try {
                         mmServerSocket.close();
@@ -84,7 +77,6 @@ public class BluetoothHostActivity extends AppCompatActivity {
             }
         }
 
-        // Closes the connect socket and causes the thread to finish.
         public void cancel() {
             try {
                 mmServerSocket.close();

@@ -191,6 +191,11 @@ public class ClientGameView extends SurfaceView implements Runnable {
         try {
             isPlaying = false;
             thread.join();
+            try {
+                joinedSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -232,6 +237,7 @@ public class ClientGameView extends SurfaceView implements Runnable {
                         System.out.println("KASCSSACASCACASCASadsasdsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaSAC " + tileIds.size() + " " + ByteBuffer.wrap(mmBuffer).getInt());
                         if (tileIds.size() == tileAmount * 2) {
                             setupTiles();
+
                         }
                     } else {
                         numBytes = mmInStream.read(mmBuffer);

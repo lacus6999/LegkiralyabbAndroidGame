@@ -35,7 +35,7 @@ public class HostGameView extends SurfaceView implements Runnable {
     private int tileAmount = 10;
     private Bitmap background;
     private int tileSize;
-    private boolean isMyTurn = true;
+    private boolean isMyTurn = false;
 
     private Images images;
 
@@ -193,6 +193,11 @@ public class HostGameView extends SurfaceView implements Runnable {
         try {
             isPlaying = false;
             thread.join();
+            try {
+                hostSocket.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

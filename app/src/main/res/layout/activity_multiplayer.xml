@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_purple"
+    android:background="@drawable/background1"
     android:padding="@dimen/box_inset_layout_padding"
     tools:context=".multiplayer.MultiplayerGameActivity"
     tools:deviceIds="wear">
@@ -19,7 +19,7 @@
         <TextView
             android:id="@+id/multiplayer_textview_host"
             android:layout_width="match_parent"
-            android:layout_height="374dp"
+            android:layout_height="331dp"
             android:gravity="center|center_vertical"
             android:text="Host"
             android:textSize="60sp" />

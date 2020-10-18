@@ -6,7 +6,7 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ic_launcher_background"
+        android:background="@drawable/background1"
         android:scaleType="centerCrop" />
 
 
@@ -21,8 +21,9 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:padding="20sp"
+            android:layout_marginBottom="50sp"
             android:text="@string/legkiralyabb_memoia_jatek"
-            android:textColor="@android:color/holo_green_dark"
+            android:textColor="@android:color/white"
             android:textSize="50sp"
             android:textStyle="bold" />
 
@@ -31,21 +32,21 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:text="@string/play"
-            android:textColor="@android:color/holo_green_dark"
+            android:text="@string/singleplayer"
+            android:textColor="@android:color/white"
             android:textSize="50sp"
             android:layout_margin="10sp"
             android:textStyle="bold" />
 
         <TextView
             android:id="@+id/play_multiplayer"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:gravity="center"
-            android:text="@string/play_multiplayer"
-            android:textColor="@android:color/holo_green_dark"
-            android:textSize="50sp"
             android:layout_margin="10sp"
+            android:gravity="center"
+            android:text="@string/multiplayer"
+            android:textColor="@android:color/white"
+            android:textSize="50sp"
             android:textStyle="bold" />
     </LinearLayout>
 

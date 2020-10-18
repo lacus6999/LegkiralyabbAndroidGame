@@ -185,8 +185,8 @@ public class HostGameView extends SurfaceView implements Runnable {
                     @Override
                     public void run() {
                         if (tilePair.get(0).getId() == -tilePair.get(1).getId()) {
-                            tiles.remove(tilePair.get(0));
-                            tiles.remove(tilePair.get(1));
+//                            tiles.remove(tilePair.get(0));
+//                            tiles.remove(tilePair.get(1));
                             if(isMyTurn)
                                 hostPoints++;
                             else

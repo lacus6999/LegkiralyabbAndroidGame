@@ -162,8 +162,8 @@ public class GameView extends SurfaceView implements Runnable {
             @Override
             public void run() {
                 if (tilePair.get(0).getId() == tilePair.get(1).getId()) {
-                    tiles.remove(tilePair.get(0));
-                    tiles.remove(tilePair.get(1));
+//                    tiles.remove(tilePair.get(0));
+//                    tiles.remove(tilePair.get(1));
                 } else {
                     tilePair.get(0).flip();
                     tilePair.get(1).flip();

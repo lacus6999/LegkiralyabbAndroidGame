@@ -15,15 +15,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoadingActivity"
+        <activity
+            android:name=".LoadingActivity"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- MULTIPLAYER -->
+        </activity> <!-- MULTIPLAYER -->
         <activity
             android:name=".multiplayer.host.BluetoothHostActivity"
             android:screenOrientation="portrait"
@@ -43,8 +44,7 @@
         <activity
             android:name=".multiplayer.MultiplayerGameActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar" />
-        <!-- SINGLEPLAYER -->
+            android:theme="@style/Theme.AppCompat.NoActionBar" /> <!-- SINGLEPLAYER -->
         <activity
             android:name=".singleplayer.GameActivity"
             android:screenOrientation="portrait"
@@ -52,7 +52,7 @@
         <activity
             android:name=".MainActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
     </application>
 
 </manifest>

@@ -28,7 +28,6 @@
                 android:id="@+id/paired_device"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@android:color/holo_green_dark"
                 android:gravity="center_horizontal"
                 android:padding="5sp"
                 android:text="Paired devices:"
@@ -38,7 +37,7 @@
 
             <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_margin="5sp"
                 android:background="@drawable/simple_green_background">
 
@@ -46,6 +45,7 @@
                     android:id="@+id/bluetooth_available_devices"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_margin="20sp"
                     android:orientation="vertical" />
             </ScrollView>
 

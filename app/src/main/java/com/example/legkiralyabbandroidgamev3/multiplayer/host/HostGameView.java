@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.os.Handler;
+import android.util.Pair;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.widget.Toast;
@@ -31,11 +32,14 @@ public class HostGameView extends SurfaceView implements Runnable {
     private boolean isPlaying;
     private List<Tile> tiles;
     private Paint paint;
+    private Paint textPaint;
 
-    private int tileAmount = 10;
+    private int tileAmount = 15;
     private Bitmap background;
     private int tileSize;
     private boolean isMyTurn = false;
+    private int hostPoints = 0;
+    private int clientPoints = 0;
 
     private Images images;
 
@@ -54,6 +58,11 @@ public class HostGameView extends SurfaceView implements Runnable {
         tileSize = images.getTileSize();
         tiles = new ArrayList<>();
         paint = new Paint();
+
+        textPaint = new Paint();
+        textPaint.setTextSize(150);
+        textPaint.setColor(Color.WHITE);
+
         paint.setTextSize(128);
         paint.setColor(Color.WHITE);
         setupBackground();
@@ -122,6 +131,12 @@ public class HostGameView extends SurfaceView implements Runnable {
             for (Tile tile : tiles) {
                 canvas.drawBitmap(tile.getShownImage(), tile.getX(), tile.getY(), paint);
             }
+
+            textPaint.setColor(Color.GREEN);
+            canvas.drawText("" + clientPoints, 200f, 1700f, textPaint);
+            textPaint.setColor(Color.RED);
+            canvas.drawText("" + hostPoints, 700f, 1700f, textPaint);
+
             getHolder().unlockCanvasAndPost(canvas);
         }
     }
@@ -170,15 +185,18 @@ public class HostGameView extends SurfaceView implements Runnable {
                     @Override
                     public void run() {
                         if (tilePair.get(0).getId() == -tilePair.get(1).getId()) {
-                            //TODO SCORE
+                            if(isMyTurn)
+                                hostPoints++;
+                            else
+                                clientPoints++;
                         } else {
                             tilePair.get(0).flip();
                             tilePair.get(1).flip();
+                            isMyTurn = !isMyTurn;
                         }
                         tilePair.clear();
                     }
                 }, 1000);
-                isMyTurn = !isMyTurn;
             }
         }
     }

@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="331dp"
             android:gravity="center|center_vertical"
-            android:text="Host"
+            android:text="@string/host"
             android:textSize="60sp" />
 
         <TextView
@@ -29,7 +29,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center|center_vertical"
-            android:text="Join"
+            android:text="@string/join"
             android:textSize="60sp" />
     </LinearLayout>
 

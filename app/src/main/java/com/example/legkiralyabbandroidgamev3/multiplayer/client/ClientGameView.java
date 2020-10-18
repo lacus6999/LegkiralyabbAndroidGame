@@ -19,13 +19,11 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class ClientGameView extends SurfaceView implements Runnable {
 
     private Thread thread;
-    private Handler handler = new Handler();
     private ConnectedThread connectedThread;
 
     private boolean isPlaying;
@@ -36,12 +34,14 @@ public class ClientGameView extends SurfaceView implements Runnable {
     private Bitmap background;
     private int tileSize;
     List<Integer> tileIds = new ArrayList<>();
+    private boolean isMyTurn = true;
 
     private Images images;
 
     private List<Tile> tilePair = new ArrayList<>();
 
     private BluetoothSocket joinedSocket;
+    private Handler handler = new Handler();
 
     public ClientGameView(Context context) {
         super(context);
@@ -58,8 +58,7 @@ public class ClientGameView extends SurfaceView implements Runnable {
         paint.setColor(Color.WHITE);
         setupBackground();
 
-
-        if(joinedSocket != null){
+        if (joinedSocket != null) {
             Toast.makeText(getContext(), "IM A CLIENT!", Toast.LENGTH_SHORT).show();
         }
     }
@@ -71,26 +70,8 @@ public class ClientGameView extends SurfaceView implements Runnable {
     private void setupTiles() {
 
         tileIds.add(1);
-        for (int i = 0; i < tileAmount; i++) {
-
-            tiles.add(new Tile(tileIds.get(i), tileSize, images.getCardImagesEveryday().get(i)));
-
-            //TODO : ami itt van kell majd
-
-//            if(){
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesPeople().get(i)));
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesPeople().get(i)));
-//            }else if (){
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesAnimal().get(i)));
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesAnimal().get(i)));
-//            }else if(){
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesEveryday().get(i)));
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesEveryday().get(i)));
-//            }else if(){
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesScience().get(i)));
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesScience().get(i)));
-//            }
-
+        for (int i = 0; i < tileAmount * 2; i++) {
+            tiles.add(new Tile(tileIds.get(i), tileSize, images.getCardImagesEveryday().get(Math.abs(tileIds.get(i)))));
         }
         for (Tile tile : tiles) {
             tile.setBackSideImage(images.getBackSideImage());
@@ -159,13 +140,9 @@ public class ClientGameView extends SurfaceView implements Runnable {
             for (Tile tile : tiles) {
                 if (x >= tile.getX() && x < (tile.getX() + tile.getShownImage().getWidth())
                         && y >= tile.getY() && y < (tile.getY() + tile.getShownImage().getHeight())) {
-                    if (!tile.isFlipped && tilePair.size() < 2) {
-                        tile.flip();
-                        tilePair.add(tile);
-
-                        if (tilePair.size() == 2) {
-                            handleCards();
-                        }
+                    if(isMyTurn) {
+                        connectedThread.write(ByteBuffer.allocate(4).putInt(tile.getId()).array());
+                        handleCards(tile.getId());
                     }
                 }
             }
@@ -173,20 +150,34 @@ public class ClientGameView extends SurfaceView implements Runnable {
         return true;
     }
 
-    private void handleCards() {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (tilePair.get(0).getId() == -tilePair.get(1).getId()) {
-                    //TODO SCORE
-                } else {
-                    tilePair.get(0).flip();
-                    tilePair.get(1).flip();
-                }
-                tilePair.clear();
+    private void handleCards(int id) {
+        Tile tile = null;
+        for(Tile tileFromList : tiles) {
+            if(tileFromList.getId() == id)
+                tile = tileFromList;
+        }
+
+        if (!tile.isFlipped && tilePair.size() < 2) {
+            tile.flip();
+            tilePair.add(tile);
+
+
+            if (tilePair.size() == 2) {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (tilePair.get(0).getId() == -tilePair.get(1).getId()) {
+                            //TODO SCORE
+                        } else {
+                            tilePair.get(0).flip();
+                            tilePair.get(1).flip();
+                        }
+                        tilePair.clear();
+                    }
+                }, 1000);
+                isMyTurn = !isMyTurn;
             }
-        }, 1000);
+        }
     }
 
 
@@ -209,15 +200,12 @@ public class ClientGameView extends SurfaceView implements Runnable {
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
-        private byte[] mmBuffer; // mmBuffer store for the stream
+        private byte[] mmBuffer;
 
         public ConnectedThread(BluetoothSocket socket) {
             mmSocket = socket;
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
-
-            // Get the input and output streams; using temp objects because
-            // member streams are final.
             try {
                 tmpIn = socket.getInputStream();
             } catch (IOException e) {
@@ -235,22 +223,20 @@ public class ClientGameView extends SurfaceView implements Runnable {
 
         public void run() {
             mmBuffer = new byte[1024];
-            int numBytes; // bytes returned from read()
-
-            // Keep listening to the InputStream until an exception occurs.
+            int numBytes;
             while (true) {
                 try {
-                    // Read from the InputStream.
-                    if(tileIds.size() <= tileAmount * 2) {
+                    if (tileIds.size() <= tileAmount * 2) {
                         numBytes = mmInStream.read(mmBuffer);
                         tileIds.add(ByteBuffer.wrap(mmBuffer).getInt());
                         System.out.println("KASCSSACASCACASCASadsasdsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaSAC " + tileIds.size() + " " + ByteBuffer.wrap(mmBuffer).getInt());
-                        if(tileIds.size() == tileAmount * 2){
+                        if (tileIds.size() == tileAmount * 2) {
                             setupTiles();
                         }
-                    }else {
+                    } else {
                         numBytes = mmInStream.read(mmBuffer);
-                        System.out.println(numBytes + "KACSAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA GOT MESSAGE");
+                        if(!isMyTurn)
+                            handleCards(ByteBuffer.wrap(mmBuffer).getInt());
                     }
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -277,6 +263,7 @@ public class ClientGameView extends SurfaceView implements Runnable {
             }
         }
     }
+
     private interface MessageConstants {
         public static final int MESSAGE_READ = 0;
         public static final int MESSAGE_WRITE = 1;

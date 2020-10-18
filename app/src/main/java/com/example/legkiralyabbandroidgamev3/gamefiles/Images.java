@@ -50,7 +50,6 @@ public class Images {
                 getDecodedResource(res, R.drawable.img_18, 800, tileSize),
                 getDecodedResource(res, R.drawable.img_19, 800, tileSize),
                 getDecodedResource(res, R.drawable.img_20, 800, tileSize)
-
         );
 
         cardImagesPeople = Arrays.asList(
@@ -70,7 +69,6 @@ public class Images {
                 getDecodedResource(res, R.drawable.people_15, 800, tileSize),
                 getDecodedResource(res, R.drawable.people_16, 800, tileSize),
                 getDecodedResource(res, R.drawable.people_17, 800, tileSize)
-
         );
 
         cardImagesAnimal = Arrays.asList(
@@ -96,8 +94,6 @@ public class Images {
                 getDecodedResource(res, R.drawable.ani_20, 800, tileSize),
                 getDecodedResource(res, R.drawable.ani_21, 800, tileSize),
                 getDecodedResource(res, R.drawable.ani_22, 800, tileSize)
-
-
         );
 
         cardImagesScience = Arrays.asList(
@@ -117,12 +113,7 @@ public class Images {
                 getDecodedResource(res, R.drawable.sci_14, 800, tileSize),
                 getDecodedResource(res, R.drawable.sci_15, 800, tileSize),
                 getDecodedResource(res, R.drawable.sci_16, 800, tileSize)
-
         );
-
-
-
-
     }
 
     private Bitmap getDecodedResource(Resources res, int img, int originalWidth, int width) {

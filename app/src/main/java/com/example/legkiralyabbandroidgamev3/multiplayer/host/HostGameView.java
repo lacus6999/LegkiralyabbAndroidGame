@@ -6,9 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
-import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.view.MotionEvent;
 import android.view.SurfaceView;
 import android.widget.Toast;
@@ -37,6 +35,7 @@ public class HostGameView extends SurfaceView implements Runnable {
     private int tileAmount = 10;
     private Bitmap background;
     private int tileSize;
+    private boolean isMyTurn = true;
 
     private Images images;
 
@@ -70,27 +69,9 @@ public class HostGameView extends SurfaceView implements Runnable {
     }
 
     private void setupTiles() {
-        for (int i = 0; i < tileAmount; i++) {
-
+        for (int i = 1; i <= tileAmount; i++) {
             tiles.add(new Tile(i, tileSize, images.getCardImagesEveryday().get(i)));
             tiles.add(new Tile(-i, tileSize, images.getCardImagesEveryday().get(i)));
-
-            //TODO : ami itt van kell majd
-
-//            if(){
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesPeople().get(i)));
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesPeople().get(i)));
-//            }else if (){
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesAnimal().get(i)));
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesAnimal().get(i)));
-//            }else if(){
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesEveryday().get(i)));
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesEveryday().get(i)));
-//            }else if(){
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesScience().get(i)));
-//                tiles.add(new Tile(i, tileSize, images.getCardImagesScience().get(i)));
-//            }
-
         }
         for (Tile tile : tiles) {
             tile.setBackSideImage(images.getBackSideImage());
@@ -106,7 +87,7 @@ public class HostGameView extends SurfaceView implements Runnable {
 
         for (int i = 0; i < tiles.size(); i++) {
             connectedThread.write(ByteBuffer.allocate(4).putInt(tiles.get(i).getId()).array());
-            this.sleep(20);
+            this.sleep(40);
             if (iterator * distance + tileSize >= 1000) {
                 iterator = 1;
                 rowCount++;
@@ -163,13 +144,9 @@ public class HostGameView extends SurfaceView implements Runnable {
             for (Tile tile : tiles) {
                 if (x >= tile.getX() && x < (tile.getX() + tile.getShownImage().getWidth())
                         && y >= tile.getY() && y < (tile.getY() + tile.getShownImage().getHeight())) {
-                    if (!tile.isFlipped && tilePair.size() < 2) {
-                        tile.flip();
-                        tilePair.add(tile);
-
-                        if (tilePair.size() == 2) {
-                            handleCards();
-                        }
+                    if(isMyTurn) {
+                        connectedThread.write(ByteBuffer.allocate(4).putInt(tile.getId()).array());
+                        handleCards(tile.getId());
                     }
                 }
             }
@@ -177,22 +154,34 @@ public class HostGameView extends SurfaceView implements Runnable {
         return true;
     }
 
-    private void handleCards() {
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (tilePair.get(0).getId() == -tilePair.get(1).getId()) {
-                    //TODO SCORE
-                } else {
-                    tilePair.get(0).flip();
-                    tilePair.get(1).flip();
-                }
-                tilePair.clear();
-            }
-        }, 1000);
-    }
+    private void handleCards(int id) {
+        Tile tile = null;
+        for(Tile tileFromList : tiles) {
+            if(tileFromList.getId() == id)
+                tile = tileFromList;
+        }
 
+        if (!tile.isFlipped && tilePair.size() < 2) {
+            tile.flip();
+            tilePair.add(tile);
+
+            if (tilePair.size() == 2) {
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        if (tilePair.get(0).getId() == -tilePair.get(1).getId()) {
+                            //TODO SCORE
+                        } else {
+                            tilePair.get(0).flip();
+                            tilePair.get(1).flip();
+                        }
+                        tilePair.clear();
+                    }
+                }, 1000);
+                isMyTurn = !isMyTurn;
+            }
+        }
+    }
 
     public void resume() {
         isPlaying = true;
@@ -213,15 +202,12 @@ public class HostGameView extends SurfaceView implements Runnable {
         private final BluetoothSocket mmSocket;
         private final InputStream mmInStream;
         private final OutputStream mmOutStream;
-        private byte[] mmBuffer; // mmBuffer store for the stream
+        private byte[] mmBuffer;
 
         public ConnectedThread(BluetoothSocket socket) {
             mmSocket = socket;
             InputStream tmpIn = null;
             OutputStream tmpOut = null;
-
-            // Get the input and output streams; using temp objects because
-            // member streams are final.
             try {
                 tmpIn = socket.getInputStream();
             } catch (IOException e) {
@@ -239,14 +225,13 @@ public class HostGameView extends SurfaceView implements Runnable {
 
         public void run() {
             mmBuffer = new byte[1024];
-            int numBytes; // bytes returned from read()
+            int numBytes;
 
-            // Keep listening to the InputStream until an exception occurs.
             while (true) {
                 try {
-                    // Read from the InputStream.
                     numBytes = mmInStream.read(mmBuffer);
-                    System.out.println(numBytes + " "  + ByteBuffer.wrap(mmBuffer).getInt() + "GOT MESAGEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEeE");
+                    if(!isMyTurn)
+                        handleCards(ByteBuffer.wrap(mmBuffer).getInt());
                 } catch (IOException e) {
                     e.printStackTrace();
                     break;

@@ -1,8 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.legkiralyabbandroidgamev3">
 
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
 
     <application
         android:allowBackup="true"
@@ -13,39 +15,36 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
-        <!--MULTIPLAYER-->
+        <activity android:name=".LoadingActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <!-- MULTIPLAYER -->
         <activity
             android:name=".multiplayer.host.BluetoothHostActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".multiplayer.client.BluetoothClientActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar"/>
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".multiplayer.host.HostGameActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".multiplayer.client.ClientGameActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
-
         <activity
             android:name=".multiplayer.MultiplayerGameActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
-
-        <!--SINGLEPLAYER-->
+        <!-- SINGLEPLAYER -->
         <activity
             android:name=".singleplayer.GameActivity"
             android:theme="@style/Theme.AppCompat.NoActionBar" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:theme="@style/Theme.AppCompat.NoActionBar"/>
     </application>
 
 </manifest>

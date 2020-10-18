@@ -35,7 +35,7 @@ public class ClientGameView extends SurfaceView implements Runnable {
     private int tileAmount = 10;
     private Bitmap background;
     private int tileSize;
-    List<Integer> tileIds;
+    List<Integer> tileIds = new ArrayList<>();
 
     private Images images;
 
@@ -73,7 +73,6 @@ public class ClientGameView extends SurfaceView implements Runnable {
         tileIds.add(1);
         for (int i = 0; i < tileAmount; i++) {
 
-            tiles.add(new Tile(tileIds.get(i), tileSize, images.getCardImagesEveryday().get(i)));
             tiles.add(new Tile(tileIds.get(i), tileSize, images.getCardImagesEveryday().get(i)));
 
             //TODO : ami itt van kell majd
@@ -163,7 +162,6 @@ public class ClientGameView extends SurfaceView implements Runnable {
                     if (!tile.isFlipped && tilePair.size() < 2) {
                         tile.flip();
                         tilePair.add(tile);
-                        connectedThread.write(ByteBuffer.allocate(4).putInt(tile.getId()).array());
 
                         if (tilePair.size() == 2) {
                             handleCards();
@@ -243,7 +241,6 @@ public class ClientGameView extends SurfaceView implements Runnable {
             while (true) {
                 try {
                     // Read from the InputStream.
-                    tileIds = new ArrayList<>();
                     if(tileIds.size() <= tileAmount * 2) {
                         numBytes = mmInStream.read(mmBuffer);
                         tileIds.add(ByteBuffer.wrap(mmBuffer).getInt());

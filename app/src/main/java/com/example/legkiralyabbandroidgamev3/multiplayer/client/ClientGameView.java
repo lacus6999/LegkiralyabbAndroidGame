@@ -152,7 +152,7 @@ public class ClientGameView extends SurfaceView implements Runnable {
             for (Tile tile : tiles) {
                 if (x >= tile.getX() && x < (tile.getX() + tile.getShownImage().getWidth())
                         && y >= tile.getY() && y < (tile.getY() + tile.getShownImage().getHeight())) {
-                    if(isMyTurn) {
+                    if (isMyTurn) {
                         connectedThread.write(ByteBuffer.allocate(4).putInt(tile.getId()).array());
                         handleCards(tile.getId());
                     }
@@ -164,8 +164,8 @@ public class ClientGameView extends SurfaceView implements Runnable {
 
     private void handleCards(int id) {
         Tile tile = null;
-        for(Tile tileFromList : tiles) {
-            if(tileFromList.getId() == id)
+        for (Tile tileFromList : tiles) {
+            if (tileFromList.getId() == id)
                 tile = tileFromList;
         }
 
@@ -178,17 +178,18 @@ public class ClientGameView extends SurfaceView implements Runnable {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (tilePair.get(0).getId() == -tilePair.get(1).getId()) { // TODO *** ITT NÉZI MEG HOGY TALÁLT-E PÁRT
-                            if(isMyTurn) {
+                        if (tilePair.get(0).getId() == -tilePair.get(1).getId()) {
+                            tiles.remove(tilePair.get(0));
+                            tiles.remove(tilePair.get(1));
+                            if (isMyTurn) {
                                 clientPoints++;
-                            }
-                            else {
+                            } else {
                                 hostPoints++;
                             }
                         } else {
                             tilePair.get(0).flip();
                             tilePair.get(1).flip();
-                            isMyTurn = !isMyTurn; // TODO VIKTOR EZT MEG KÉNE CSINÁLNI, HOGY HA AZ ÉN KÖRÖMBEN TALÁLT PÁRT *** , AKKOR NE NEGÁLJON
+                            isMyTurn = !isMyTurn;
                         }
                         tilePair.clear();
                     }
@@ -256,7 +257,7 @@ public class ClientGameView extends SurfaceView implements Runnable {
                         }
                     } else {
                         numBytes = mmInStream.read(mmBuffer);
-                        if(!isMyTurn)
+                        if (!isMyTurn)
                             handleCards(ByteBuffer.wrap(mmBuffer).getInt());
                     }
                 } catch (IOException e) {

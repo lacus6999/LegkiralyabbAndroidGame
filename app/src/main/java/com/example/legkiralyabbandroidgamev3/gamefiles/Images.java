@@ -27,7 +27,7 @@ public class Images {
     private int tileSize = 150;
 
     public Images(Resources res) {
-        backgroundImage = getDecodedResource(res, R.drawable.background1, 831, 1280);
+        backgroundImage = getDecodedResource(res, R.drawable.background1, 831, 1600);
         backSideImage = getDecodedResource(res, R.drawable.card_background, 800, tileSize);
         cardImagesEveryday = Arrays.asList(
                 getDecodedResource(res, R.drawable.img_01, 800, tileSize),

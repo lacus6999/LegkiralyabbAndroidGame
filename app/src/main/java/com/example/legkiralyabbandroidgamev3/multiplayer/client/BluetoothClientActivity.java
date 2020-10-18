@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothSocket;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -37,29 +38,24 @@ public class BluetoothClientActivity extends AppCompatActivity {
 
     private void init() {
         bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
-        if (bluetoothAdapter != null) {
-            if (bluetoothAdapter.isEnabled()) {
-                Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
-                if (!pairedDevices.isEmpty()) {
-                    LinearLayout bluetooth_available_devices = findViewById(R.id.bluetooth_available_devices);
-
-                    for (BluetoothDevice bluetoothDevice : pairedDevices) {
-                        bluetooth_available_devices.addView(getTextView(bluetoothDevice.getName(), bluetoothDevice.getAddress()));
-                    }
-                } else {
-                    TextView textView = findViewById(R.id.paired_device);
-                    textView.setText("No paired device.");
-                }
+        TextView textView = findViewById(R.id.paired_device);
+        Set<BluetoothDevice> pairedDevices = bluetoothAdapter.getBondedDevices();
+        if (!pairedDevices.isEmpty()) {
+            LinearLayout bluetooth_available_devices = findViewById(R.id.bluetooth_available_devices);
+            for (BluetoothDevice bluetoothDevice : pairedDevices) {
+                bluetooth_available_devices.addView(getTextView(bluetoothDevice.getName(), bluetoothDevice.getAddress()));
             }
-            //setTextView();
         } else {
-            //setTextView("Bluetooth is not accessible on your device.");
+            textView.setText("No paired device. Pair a device first, then come back.");
         }
     }
 
     private TextView getTextView(final String name, String address) {
         final BluetoothTextView textView = new BluetoothTextView(this, name, address);
         textView.setText(name);
+        textView.setTextSize(20);
+        textView.setGravity(Gravity.CENTER);
+        textView.setPadding(20, 20, 20, 20);
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -29,8 +29,9 @@ public class ClientGameView extends SurfaceView implements Runnable {
     private boolean isPlaying;
     private List<Tile> tiles;
     private Paint paint;
+    private Paint textPaint;
 
-    private int tileAmount = 10;
+    private int tileAmount = 15;
     private Bitmap background;
     private int tileSize;
     List<Integer> tileIds = new ArrayList<>();
@@ -42,6 +43,8 @@ public class ClientGameView extends SurfaceView implements Runnable {
 
     private BluetoothSocket joinedSocket;
     private Handler handler = new Handler();
+    private int clientPoints = 0;
+    private int hostPoints = 0;
 
     public ClientGameView(Context context) {
         super(context);
@@ -54,8 +57,11 @@ public class ClientGameView extends SurfaceView implements Runnable {
         tileSize = images.getTileSize();
         tiles = new ArrayList<>();
         paint = new Paint();
-        paint.setTextSize(128);
-        paint.setColor(Color.WHITE);
+
+        textPaint = new Paint();
+        textPaint.setTextSize(150);
+        textPaint.setColor(Color.WHITE);
+
         setupBackground();
 
         if (joinedSocket != null) {
@@ -118,6 +124,12 @@ public class ClientGameView extends SurfaceView implements Runnable {
             for (Tile tile : tiles) {
                 canvas.drawBitmap(tile.getShownImage(), tile.getX(), tile.getY(), paint);
             }
+
+            textPaint.setColor(Color.RED);
+            canvas.drawText("" + clientPoints, 200f, 1700f, textPaint);
+            textPaint.setColor(Color.GREEN);
+            canvas.drawText("" + hostPoints, 700f, 1700f, textPaint);
+
             getHolder().unlockCanvasAndPost(canvas);
         }
     }
@@ -166,16 +178,21 @@ public class ClientGameView extends SurfaceView implements Runnable {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        if (tilePair.get(0).getId() == -tilePair.get(1).getId()) {
-                            //TODO SCORE
+                        if (tilePair.get(0).getId() == -tilePair.get(1).getId()) { // TODO *** ITT NÉZI MEG HOGY TALÁLT-E PÁRT
+                            if(isMyTurn) {
+                                clientPoints++;
+                            }
+                            else {
+                                hostPoints++;
+                            }
                         } else {
                             tilePair.get(0).flip();
                             tilePair.get(1).flip();
+                            isMyTurn = !isMyTurn; // TODO VIKTOR EZT MEG KÉNE CSINÁLNI, HOGY HA AZ ÉN KÖRÖMBEN TALÁLT PÁRT *** , AKKOR NE NEGÁLJON
                         }
                         tilePair.clear();
                     }
                 }, 1000);
-                isMyTurn = !isMyTurn;
             }
         }
     }
@@ -234,10 +251,8 @@ public class ClientGameView extends SurfaceView implements Runnable {
                     if (tileIds.size() <= tileAmount * 2) {
                         numBytes = mmInStream.read(mmBuffer);
                         tileIds.add(ByteBuffer.wrap(mmBuffer).getInt());
-                        System.out.println("KASCSSACASCACASCASadsasdsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaSAC " + tileIds.size() + " " + ByteBuffer.wrap(mmBuffer).getInt());
                         if (tileIds.size() == tileAmount * 2) {
                             setupTiles();
-
                         }
                     } else {
                         numBytes = mmInStream.read(mmBuffer);
